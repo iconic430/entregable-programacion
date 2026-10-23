@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesión 19 | Manipulación del DOM - Sabores de México</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="sesiones.css" rel="stylesheet">
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="container">
+      <div class="etiqueta">Sesión 19 · JavaScript: selectores y DOM</div>
+      <h1>Manipulación del DOM</h1>
+      <a href="index.html" class="small">← Volver al inicio</a>
+    </div>
+  </header>
+
+  <main class="container my-5">
+
+    <!-- Elemento que cambia el Desafío 1 -->
+    <h2 id="titulo" class="fw-bold mb-2">Platillos del día en Sabores de México</h2>
+    <p class="text-secondary mb-4">Usa los botones para aplicar cada desafío con los selectores de JavaScript.</p>
+
+    <!-- Botones de los desafíos -->
+    <div class="d-flex flex-wrap gap-2 mb-4">
+      <button class="btn btn-success" id="cambiarTexto">1. Cambiar texto del título</button>
+      <button class="btn btn-danger" id="cambiarColor">2. Cambiar color de las cajas</button>
+      <button class="btn btn-warning" id="primeraCajaVerde">3. Resaltar la primera caja</button>
+      <button class="btn btn-primary" id="bordeCajas">4. Agregar borde a las cajas</button>
+      <button class="btn btn-outline-secondary" id="reiniciar">Reiniciar</button>
+    </div>
+
+    <!-- Cajas (class="caja") que manipulan los Desafíos 2, 3 y 4 -->
+    <div class="row g-4 mb-5">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="caja">
+          <img src="https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=600" alt="Tacos al pastor">
+          <h5>Tacos al pastor</h5>
+          <p class="text-secondary mb-0">$140</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="caja">
+          <img src="https://images.unsplash.com/photo-1534352956036-cd81e27dd615?w=600" alt="Enchiladas verdes">
+          <h5>Enchiladas verdes</h5>
+          <p class="text-secondary mb-0">$160</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="caja">
+          <img src="https://images.unsplash.com/photo-1586511925558-a4c6376fe65f?w=600" alt="Guacamole con totopos">
+          <h5>Guacamole con totopos</h5>
+          <p class="text-secondary mb-0">$95</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="caja">
+          <img src="https://images.unsplash.com/photo-1624371414361-e670edf4898d?w=600" alt="Churros">
+          <h5>Churros</h5>
+          <p class="text-secondary mb-0">$70</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Estructura del DOM de esta página -->
+    <div class="card actividad shadow-sm mb-4">
+      <div class="card-body">
+        <h3 class="h5 fw-bold">Estructura del DOM de esta página</h3>
+<pre class="codigo">Document
+ └── html
+      ├── head
+      │    └── title
+      └── body
+           ├── header
+           └── main
+                ├── h2 (id="titulo")
+                ├── div → button (id="cambiarTexto"), button (id="cambiarColor") ...
+                └── div.row → div.caja × 4</pre>
+      </div>
+    </div>
+
+    <!-- Selectores usados -->
+    <div class="card actividad shadow-sm">
+      <div class="card-body">
+        <h3 class="h5 fw-bold">Selectores usados en script.js</h3>
+        <ul class="mb-0">
+          <li><code>getElementById</code>: título y botones (Desafío 1).</li>
+          <li><code>getElementsByClassName</code>: todas las cajas con un bucle <code>for</code> (Desafío 2).</li>
+          <li><code>querySelector</code>: solo la primera caja (Desafío 3).</li>
+          <li><code>querySelectorAll</code>: todas las cajas con <code>forEach</code> (Desafío 4).</li>
+          <li><code>DOMContentLoaded</code>: el código se ejecuta cuando el DOM ya está cargado.</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

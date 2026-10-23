@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesión 20 | Banner promocional - Sabores de México</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="sesiones.css" rel="stylesheet">
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="container">
+      <div class="etiqueta">Sesión 20 · Actividad 1</div>
+      <h1>Fondo de un banner promocional</h1>
+      <a href="index.html" class="small">← Volver al inicio</a>
+    </div>
+  </header>
+
+  <main class="container my-5">
+
+    <p class="text-secondary">Cada vez que se actualiza la promoción, el banner cambia su color de fondo con clases de Bootstrap para llamar la atención de los clientes.</p>
+
+    <!-- Banner promocional -->
+    <div id="banner" class="bg-secondary text-dark p-4 p-md-5 mb-4 shadow-sm">
+      <div class="small fw-bold text-uppercase" id="bannerEtiqueta">Promoción</div>
+      <h2 class="fw-bold display-6 mb-2" id="bannerTitulo">Pronto: nuestra promoción de la semana</h2>
+      <p class="fs-5 mb-0" id="bannerTexto">Presiona "Actualizar promoción" para verla.</p>
+    </div>
+
+    <button class="btn btn-success btn-lg" id="actualizarPromo">Actualizar promoción</button>
+    <span class="ms-2 text-secondary" id="contadorPromo"></span>
+
+  </main>
+
+  <script>
+    // Promociones que se van mostrando en el banner.
+    const promociones = [
+      { etiqueta: "Martes de tacos", titulo: "🌮 2x1 en tacos al pastor", texto: "Todo el día, en restaurante y a domicilio." },
+      { etiqueta: "Fin de semana", titulo: "🍲 Pozole + agua fresca por $150", texto: "Sábados y domingos de 13:00 a 18:00 h." },
+      { etiqueta: "Postres", titulo: "🍫 Churros gratis en pedidos mayores a $400", texto: "Válido en pedidos a domicilio esta semana." }
+    ];
+    let indice = 0;
+
+    document.getElementById("actualizarPromo").addEventListener("click", function () {
+      // getElementById: seleccionamos el banner por su id.
+      const banner = document.getElementById("banner");
+
+      // Cambiamos el color de fondo con la clase de Bootstrap bg-warning.
+      banner.classList.remove("bg-secondary");
+      banner.classList.add("bg-warning");
+
+      // Actualizamos el contenido de la promoción.
+      const promo = promociones[indice];
+      document.getElementById("bannerEtiqueta").textContent = promo.etiqueta;
+      document.getElementById("bannerTitulo").textContent = promo.titulo;
+      document.getElementById("bannerTexto").textContent = promo.texto;
+      document.getElementById("contadorPromo").textContent = `Promoción ${indice + 1} de ${promociones.length}`;
+
+      indice = (indice + 1) % promociones.length;
+    });
+  </script>
+</body>
+</html>
