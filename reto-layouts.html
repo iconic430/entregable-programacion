@@ -34,22 +34,50 @@
     .ventana .punto { width: 10px; height: 10px; border-radius: 50%; }
     .ventana .url { flex: 1; height: 10px; background: #f8f9fb; border-radius: 4px; margin-left: 8px; }
 
-    /* Cajas del layout */
+    /* Cajas del layout: foto de fondo + barra de color con el texto */
     .caja-layout {
-      color: #fff;
-      font-weight: 500;
-      font-size: .85rem;
+      position: relative;
+      overflow: hidden;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 10px;
-      min-height: 120px;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 200px;
       height: 100%;
+      color: #fff;
+      background: var(--marco);
     }
-    .caja-layout code { color: #fff; background: rgba(0, 0, 0, .15); padding: 2px 6px; border-radius: 4px; }
-    .baja { min-height: 70px; }
-    .alta { min-height: 260px; }
+    .caja-layout img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s;
+    }
+    .caja-layout:hover img { transform: scale(1.05); }
+    .caja-layout .pie {
+      position: relative;
+      padding: 10px 14px;
+    }
+    .caja-layout .pie h3 { font-size: 1.05rem; font-weight: 700; margin: 0; }
+    .caja-layout .pie p { margin: 2px 0 0; font-size: .85rem; opacity: .95; }
+    .caja-layout code {
+      color: #fff;
+      background: rgba(0, 0, 0, .18);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: .75rem;
+    }
+
+    /* Encabezado del layout 3: banner con la foto oscurecida */
+    .banner-layout { min-height: 180px; justify-content: center; text-align: center; }
+    .banner-layout img { filter: brightness(.45); }
+    .banner-layout .pie h3 { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900; }
+
+    /* Pie de página del layout 3: solo texto */
+    .pie-layout { min-height: 90px; justify-content: center; text-align: center; padding: 14px; }
+
+    .alta { min-height: 340px; }
 
     .rojo { background: var(--rojo); }
     .coral { background: var(--coral); }
@@ -71,44 +99,92 @@
 
   <main class="container my-5">
     <p class="text-secondary">
-      Réplica de las tres opciones de layout del reto usando solo <code>.row</code> y <code>.col-*</code> de Bootstrap 5.
-      Cada caja muestra las clases que usa. En celular todas las columnas se apilan (<code>col-12</code>) y desde
-      tablet (<code>md</code>) se acomodan como en la imagen.
+      Réplica de las tres opciones de layout del reto usando solo <code>.row</code> y <code>.col-*</code> de Bootstrap 5,
+      con el contenido de Sabores de México. Cada caja muestra las clases que usa. En celular todas las columnas se
+      apilan (<code>col-12</code>) y desde tablet (<code>md</code>) se acomodan como en la imagen.
     </p>
 
     <!-- ================= OPCIÓN 1: dos filas de tres columnas ================= -->
     <section class="mb-5">
-      <h2 class="h4 fw-bold mb-3">Opción 1</h2>
+      <h2 class="h4 fw-bold mb-3">Opción 1 · Nuestro menú</h2>
       <div class="ventana shadow">
         <div class="barra"><span class="punto rojo"></span><span class="punto naranja"></span><span class="punto aqua"></span><span class="url"></span></div>
         <div class="row g-3">
-          <div class="col-12 col-md-4"><div class="caja-layout rojo"><span><code>col-12 col-md-4</code></span></div></div>
-          <div class="col-12 col-md-4"><div class="caja-layout coral"><span><code>col-12 col-md-4</code></span></div></div>
-          <div class="col-12 col-md-4"><div class="caja-layout naranja"><span><code>col-12 col-md-4</code></span></div></div>
-          <div class="col-12 col-md-4"><div class="caja-layout verde"><span><code>col-12 col-md-4</code></span></div></div>
-          <div class="col-12 col-md-4"><div class="caja-layout turquesa"><span><code>col-12 col-md-4</code></span></div></div>
-          <div class="col-12 col-md-4"><div class="caja-layout aqua"><span><code>col-12 col-md-4</code></span></div></div>
+          <div class="col-12 col-md-4">
+            <div class="caja-layout">
+              <img src="https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=700" alt="Tacos al pastor">
+              <div class="pie rojo"><h3>Tacos al pastor · $140</h3><p><code>col-12 col-md-4</code></p></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="caja-layout">
+              <img src="https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=700" alt="Quesadillas">
+              <div class="pie coral"><h3>Quesadillas · $85</h3><p><code>col-12 col-md-4</code></p></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="caja-layout">
+              <img src="https://images.unsplash.com/photo-1586511925558-a4c6376fe65f?w=700" alt="Guacamole con totopos">
+              <div class="pie naranja"><h3>Guacamole con totopos · $95</h3><p><code>col-12 col-md-4</code></p></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="caja-layout">
+              <img src="https://images.unsplash.com/photo-1534352956036-cd81e27dd615?w=700" alt="Enchiladas verdes">
+              <div class="pie verde"><h3>Enchiladas verdes · $160</h3><p><code>col-12 col-md-4</code></p></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="caja-layout">
+              <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=700" alt="Burrito norteño">
+              <div class="pie turquesa"><h3>Burrito norteño · $150</h3><p><code>col-12 col-md-4</code></p></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="caja-layout">
+              <img src="https://images.unsplash.com/photo-1624371414361-e670edf4898d?w=700" alt="Churros">
+              <div class="pie aqua"><h3>Churros · $70</h3><p><code>col-12 col-md-4</code></p></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ================= OPCIÓN 2: bloque principal + columna lateral alta ================= -->
     <section class="mb-5">
-      <h2 class="h4 fw-bold mb-3">Opción 2</h2>
+      <h2 class="h4 fw-bold mb-3">Opción 2 · Nuestras instalaciones</h2>
       <div class="ventana shadow">
         <div class="barra"><span class="punto rojo"></span><span class="punto naranja"></span><span class="punto aqua"></span><span class="url"></span></div>
         <div class="row g-3">
           <!-- Lado izquierdo: una fila anidada -->
           <div class="col-12 col-md-8">
             <div class="row g-3">
-              <div class="col-12"><div class="caja-layout rojo"><span><code>col-12</code> (dentro de <code>col-md-8</code>)</span></div></div>
-              <div class="col-12 col-sm-6"><div class="caja-layout verde"><span><code>col-12 col-sm-6</code></span></div></div>
-              <div class="col-12 col-sm-6"><div class="caja-layout turquesa"><span><code>col-12 col-sm-6</code></span></div></div>
+              <div class="col-12">
+                <div class="caja-layout">
+                  <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200" alt="Comedor principal">
+                  <div class="pie rojo"><h3>Comedor principal</h3><p>Espacio para 80 personas · <code>col-12</code> dentro de <code>col-md-8</code></p></div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="caja-layout">
+                  <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=700" alt="Cenas privadas">
+                  <div class="pie verde"><h3>Cenas privadas</h3><p><code>col-12 col-sm-6</code></p></div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="caja-layout">
+                  <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=700" alt="Terraza">
+                  <div class="pie turquesa"><h3>Terraza</h3><p><code>col-12 col-sm-6</code></p></div>
+                </div>
+              </div>
             </div>
           </div>
           <!-- Lado derecho: columna alta -->
           <div class="col-12 col-md-4">
-            <div class="caja-layout naranja"><span><code>col-12 col-md-4</code></span></div>
+            <div class="caja-layout alta">
+              <img src="https://images.unsplash.com/photo-1640719028782-8230f1bdc42a?w=700" alt="Chilaquiles">
+              <div class="pie naranja"><h3>Platillo del día: chilaquiles</h3><p>Rojos o verdes, con huevo · <code>col-12 col-md-4</code></p></div>
+            </div>
           </div>
         </div>
       </div>
@@ -116,14 +192,37 @@
 
     <!-- ================= OPCIÓN 3: encabezado, lateral + contenido, pie ================= -->
     <section class="mb-5">
-      <h2 class="h4 fw-bold mb-3">Opción 3</h2>
+      <h2 class="h4 fw-bold mb-3">Opción 3 · Página de promociones</h2>
       <div class="ventana shadow">
         <div class="barra"><span class="punto rojo"></span><span class="punto naranja"></span><span class="punto aqua"></span><span class="url"></span></div>
         <div class="row g-3">
-          <div class="col-12"><div class="caja-layout naranja baja"><span><code>col-12</code> encabezado</span></div></div>
-          <div class="col-12 col-md-3"><div class="caja-layout verde alta"><span><code>col-12 col-md-3</code> lateral</span></div></div>
-          <div class="col-12 col-md-9"><div class="caja-layout rojo alta"><span><code>col-12 col-md-9</code> contenido</span></div></div>
-          <div class="col-12"><div class="caja-layout turquesa baja"><span><code>col-12</code> pie de página</span></div></div>
+          <div class="col-12">
+            <div class="caja-layout banner-layout naranja">
+              <img src="https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=1400" alt="Tacos">
+              <div class="pie">
+                <h3>Sabores de México</h3>
+                <p>Cocina tradicional · encabezado <code>col-12</code></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="caja-layout alta">
+              <img src="https://images.unsplash.com/photo-1624300629298-e9de39c13be5?w=600" alt="Tacos de camarón">
+              <div class="pie verde"><h3>Nuevo: tacos de camarón</h3><p>Lateral · <code>col-12 col-md-3</code></p></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-9">
+            <div class="caja-layout alta">
+              <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=1400" alt="Martes de tacos">
+              <div class="pie rojo"><h3>🌮 Martes de tacos: 2x1 todo el día</h3><p>En restaurante y a domicilio · contenido <code>col-12 col-md-9</code></p></div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="caja-layout pie-layout turquesa">
+              <h3 class="h6 fw-bold mb-1">© 2026 Sabores de México · Av. Reforma 123, CDMX · (55) 1234 5678</h3>
+              <p class="small mb-0">Pie de página · <code>col-12</code></p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
