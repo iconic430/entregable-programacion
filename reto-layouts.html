@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El gran reto de maquetación | Desafío 4 - Layouts con grid</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="sesiones.css" rel="stylesheet">
+  <style>
+    /* Colores tomados de la imagen del reto */
+    :root {
+      --marco: #2b2f3e;
+      --rojo: #fc6057;
+      --coral: #fd825c;
+      --naranja: #fda061;
+      --verde: #01a787;
+      --turquesa: #1bc1a1;
+      --aqua: #34daba;
+    }
+
+    /* Ventana de navegador que envuelve cada layout */
+    .ventana {
+      background: var(--marco);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .ventana .barra {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .ventana .punto { width: 10px; height: 10px; border-radius: 50%; }
+    .ventana .url { flex: 1; height: 10px; background: #f8f9fb; border-radius: 4px; margin-left: 8px; }
+
+    /* Cajas del layout */
+    .caja-layout {
+      color: #fff;
+      font-weight: 500;
+      font-size: .85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      min-height: 120px;
+      height: 100%;
+    }
+    .caja-layout code { color: #fff; background: rgba(0, 0, 0, .15); padding: 2px 6px; border-radius: 4px; }
+    .baja { min-height: 70px; }
+    .alta { min-height: 260px; }
+
+    .rojo { background: var(--rojo); }
+    .coral { background: var(--coral); }
+    .naranja { background: var(--naranja); }
+    .verde { background: var(--verde); }
+    .turquesa { background: var(--turquesa); }
+    .aqua { background: var(--aqua); }
+  </style>
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="container">
+      <div class="etiqueta">El gran reto de maquetación · Desafío 4</div>
+      <h1>Layouts con el grid de Bootstrap 5</h1>
+      <a href="index.html" class="small">← Volver al inicio</a>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <p class="text-secondary">
+      Réplica de las tres opciones de layout del reto usando solo <code>.row</code> y <code>.col-*</code> de Bootstrap 5.
+      Cada caja muestra las clases que usa. En celular todas las columnas se apilan (<code>col-12</code>) y desde
+      tablet (<code>md</code>) se acomodan como en la imagen.
+    </p>
+
+    <!-- ================= OPCIÓN 1: dos filas de tres columnas ================= -->
+    <section class="mb-5">
+      <h2 class="h4 fw-bold mb-3">Opción 1</h2>
+      <div class="ventana shadow">
+        <div class="barra"><span class="punto rojo"></span><span class="punto naranja"></span><span class="punto aqua"></span><span class="url"></span></div>
+        <div class="row g-3">
+          <div class="col-12 col-md-4"><div class="caja-layout rojo"><span><code>col-12 col-md-4</code></span></div></div>
+          <div class="col-12 col-md-4"><div class="caja-layout coral"><span><code>col-12 col-md-4</code></span></div></div>
+          <div class="col-12 col-md-4"><div class="caja-layout naranja"><span><code>col-12 col-md-4</code></span></div></div>
+          <div class="col-12 col-md-4"><div class="caja-layout verde"><span><code>col-12 col-md-4</code></span></div></div>
+          <div class="col-12 col-md-4"><div class="caja-layout turquesa"><span><code>col-12 col-md-4</code></span></div></div>
+          <div class="col-12 col-md-4"><div class="caja-layout aqua"><span><code>col-12 col-md-4</code></span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OPCIÓN 2: bloque principal + columna lateral alta ================= -->
+    <section class="mb-5">
+      <h2 class="h4 fw-bold mb-3">Opción 2</h2>
+      <div class="ventana shadow">
+        <div class="barra"><span class="punto rojo"></span><span class="punto naranja"></span><span class="punto aqua"></span><span class="url"></span></div>
+        <div class="row g-3">
+          <!-- Lado izquierdo: una fila anidada -->
+          <div class="col-12 col-md-8">
+            <div class="row g-3">
+              <div class="col-12"><div class="caja-layout rojo"><span><code>col-12</code> (dentro de <code>col-md-8</code>)</span></div></div>
+              <div class="col-12 col-sm-6"><div class="caja-layout verde"><span><code>col-12 col-sm-6</code></span></div></div>
+              <div class="col-12 col-sm-6"><div class="caja-layout turquesa"><span><code>col-12 col-sm-6</code></span></div></div>
+            </div>
+          </div>
+          <!-- Lado derecho: columna alta -->
+          <div class="col-12 col-md-4">
+            <div class="caja-layout naranja"><span><code>col-12 col-md-4</code></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OPCIÓN 3: encabezado, lateral + contenido, pie ================= -->
+    <section class="mb-5">
+      <h2 class="h4 fw-bold mb-3">Opción 3</h2>
+      <div class="ventana shadow">
+        <div class="barra"><span class="punto rojo"></span><span class="punto naranja"></span><span class="punto aqua"></span><span class="url"></span></div>
+        <div class="row g-3">
+          <div class="col-12"><div class="caja-layout naranja baja"><span><code>col-12</code> encabezado</span></div></div>
+          <div class="col-12 col-md-3"><div class="caja-layout verde alta"><span><code>col-12 col-md-3</code> lateral</span></div></div>
+          <div class="col-12 col-md-9"><div class="caja-layout rojo alta"><span><code>col-12 col-md-9</code> contenido</span></div></div>
+          <div class="col-12"><div class="caja-layout turquesa baja"><span><code>col-12</code> pie de página</span></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

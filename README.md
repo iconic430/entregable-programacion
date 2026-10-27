@@ -18,3 +18,7 @@
 ## Sesión 25 · JS en acción
 
 - **sesion25-carrito.html** + **carrito.js**: Actividad 1 "Carrito de compras interactivo". Cinco cards con imagen, nombre, precio y botón Agregar; funciones `agregarProducto()` y `eliminarProducto()` que crean y quitan elementos del DOM (se elimina el último añadido); contador y total que se actualizan al instante; colores de Bootstrap que cambian según la acción (verde al agregar, rojo al eliminar, gris con el carrito vacío).
+
+## El gran reto de maquetación
+
+- **reto-layouts.html**: Desafío 4, réplica de las tres opciones de layout con el grid de Bootstrap 5 (`row`, `col-12`, `col-md-4`, `col-md-8`, `col-md-3`, `col-md-9`, fila anidada). En celular las columnas se apilan y desde `md` toman la forma de la imagen.
