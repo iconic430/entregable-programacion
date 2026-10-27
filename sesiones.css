@@ -1,4 +1,4 @@
-/* Estilos compartidos de las actividades de las sesiones 19 y 20 */
+/* Estilos compartidos de las actividades de las sesiones 19, 20 y 25 */
 body {
   font-family: "Roboto", sans-serif;
   background-color: #f4f5f2;
@@ -40,3 +40,8 @@ body {
 /* Sesión 20: banner y testimonios */
 #banner { border-radius: 12px; transition: background-color .3s; }
 .testimonio { transition: color .3s; }
+
+/* Sesión 25: carrito de compras */
+.producto { border: 2px solid transparent; transition: border-color .3s; }
+.producto img { height: 160px; object-fit: cover; }
+#listaCarrito .list-group-item { transition: background-color .3s; }

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesión 25 | Carrito de compras - Sabores de México</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="sesiones.css" rel="stylesheet">
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="container">
+      <div class="etiqueta">Sesión 25 · Actividad 1</div>
+      <h1>Carrito de compras interactivo</h1>
+      <a href="index.html" class="small">← Volver al inicio</a>
+    </div>
+  </header>
+
+  <main class="container my-5">
+
+    <!-- ================= DISEÑO: estados visuales y flujo ================= -->
+    <div class="card actividad shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="h5 fw-bold">Diseño del carrito</h2>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <p class="fw-medium mb-2">Estados visuales</p>
+            <span class="badge text-bg-success me-1">Verde</span> producto agregado<br>
+            <span class="badge text-bg-danger me-1 mt-2">Rojo</span> producto eliminado<br>
+            <span class="badge text-bg-secondary me-1 mt-2">Gris</span> carrito vacío
+          </div>
+          <div class="col-md-6">
+            <p class="fw-medium mb-2">Flujo de interacción</p>
+            <p class="mb-1">Clic en <strong>Agregar</strong> → actualiza el carrito → cambia a verde el color y el contador.</p>
+            <p class="mb-0">Clic en <strong>Eliminar último</strong> → se quita el último producto → cambia a rojo el color y el contador.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- ================= PRODUCTOS: 5 cards ================= -->
+      <div class="col-lg-8">
+        <h2 class="h4 fw-bold mb-3">Productos</h2>
+        <div class="row g-3" id="productos">
+
+          <div class="col-12 col-sm-6 col-xl-4">
+            <div class="card producto h-100 shadow-sm">
+              <img src="https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=500" class="card-img-top" alt="Tacos al pastor">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Tacos al pastor</h5>
+                <p class="fw-bold fs-5 mt-auto">$140</p>
+                <button class="btn btn-outline-success btn-agregar" data-nombre="Tacos al pastor" data-precio="140">Agregar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-xl-4">
+            <div class="card producto h-100 shadow-sm">
+              <img src="https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=500" class="card-img-top" alt="Quesadillas">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Quesadillas</h5>
+                <p class="fw-bold fs-5 mt-auto">$85</p>
+                <button class="btn btn-outline-success btn-agregar" data-nombre="Quesadillas" data-precio="85">Agregar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-xl-4">
+            <div class="card producto h-100 shadow-sm">
+              <img src="https://images.unsplash.com/photo-1586511925558-a4c6376fe65f?w=500" class="card-img-top" alt="Guacamole con totopos">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Guacamole con totopos</h5>
+                <p class="fw-bold fs-5 mt-auto">$95</p>
+                <button class="btn btn-outline-success btn-agregar" data-nombre="Guacamole con totopos" data-precio="95">Agregar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-xl-4">
+            <div class="card producto h-100 shadow-sm">
+              <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=500" class="card-img-top" alt="Burrito norteño">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Burrito norteño</h5>
+                <p class="fw-bold fs-5 mt-auto">$150</p>
+                <button class="btn btn-outline-success btn-agregar" data-nombre="Burrito norteño" data-precio="150">Agregar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 col-xl-4">
+            <div class="card producto h-100 shadow-sm">
+              <img src="https://images.unsplash.com/photo-1624371414361-e670edf4898d?w=500" class="card-img-top" alt="Churros">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Churros</h5>
+                <p class="fw-bold fs-5 mt-auto">$70</p>
+                <button class="btn btn-outline-success btn-agregar" data-nombre="Churros" data-precio="70">Agregar</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= CARRITO ================= -->
+      <div class="col-lg-4">
+        <div class="card shadow-sm sticky-lg-top" style="top: 20px;">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h2 class="h5 fw-bold mb-0">🛒 Carrito</h2>
+            <span class="badge rounded-pill text-bg-secondary fs-6" id="contador">0</span>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-secondary py-2 mb-3" id="mensaje">El carrito está vacío.</div>
+            <ul class="list-group mb-3" id="listaCarrito"></ul>
+            <div class="d-flex justify-content-between fs-5 mb-3">
+              <span>Total:</span>
+              <strong id="total">$0</strong>
+            </div>
+            <button class="btn btn-danger w-100" id="eliminarUltimo">Eliminar último</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="carrito.js"></script>
+</body>
+</html>

@@ -14,3 +14,7 @@
 - **sesion20-testimonios.html**: Actividad 2, testimonios con clase `testimonio-vip` → `text-primary` (`getElementsByClassName`) y todos los párrafos → `text-danger` (`getElementsByTagName`).
 - **sesion20-contacto.html**: Actividad 3, formulario de contacto: primer campo de texto → `bg-success` (`querySelector`), todos los botones → `btn-danger` (`querySelectorAll`), campo nombre → `text-warning` (`getElementsByName`).
 - **sesiones.css**: estilos compartidos de las páginas de actividades.
+
+## Sesión 25 · JS en acción
+
+- **sesion25-carrito.html** + **carrito.js**: Actividad 1 "Carrito de compras interactivo". Cinco cards con imagen, nombre, precio y botón Agregar; funciones `agregarProducto()` y `eliminarProducto()` que crean y quitan elementos del DOM (se elimina el último añadido); contador y total que se actualizan al instante; colores de Bootstrap que cambian según la acción (verde al agregar, rojo al eliminar, gris con el carrito vacío).
