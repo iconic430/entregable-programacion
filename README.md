@@ -1,30 +1,93 @@
-# Entregable - Programación
+# Sabores de México · Proyecto final
 
-- **proyecto primera materia.html**: página "Sabores de México" hecha con Bootstrap 5 (navbar, carrusel, modal, nav/tabs, offcanvas, formulario de calificación y pedidos a domicilio).
-- **responsivo.html**: ejercicio de `container` / `container-fluid` y media queries que cambian el color de fondo según el tamaño de la pantalla.
-- **index.html**: página de inicio con enlaces a los dos archivos.
+Sitio web de un restaurante de cocina tradicional mexicana desarrollado durante la materia **Programación y diseño de aplicaciones**. Integra todo lo trabajado en el curso: maquetación con HTML5 y Bootstrap 5, diseño responsivo, interactividad con JavaScript y consumo de APIs RESTful.
 
-## Proyecto Fase 3 · Integración de APIs REST
+- **Sitio publicado:** https://entregable-programacion.vercel.app/
+- **Repositorio:** https://github.com/iconic430/entregable-programacion
 
-- **api.js**: consume la API REST de TheMealDB (recetas mexicanas, búsqueda y detalle con caché) y la de Open-Meteo (clima actual en CDMX). Maneja estados de carga, error con "Reintentar" y sin resultados.
-- **pruebas-api.html**: 11 pruebas automáticas de las APIs y de la interfaz.
-- **DOCUMENTACION.md**: aspectos técnicos, documentación de las APIs y bibliotecas usadas.
+---
 
-## Sesión 19 · JavaScript: selectores y DOM
+## Cómo ejecutar la aplicación
 
-- **sesion19.html** + **script.js**: Actividad 1 "Manipulación del DOM". Cuatro desafíos con `getElementById`, `getElementsByClassName`, `querySelector` y `querySelectorAll`, todo dentro de `DOMContentLoaded`.
+El proyecto es un sitio estático: no necesita instalar nada ni levantar un servidor.
 
-## Sesión 20 · Selectores y colores en Bootstrap
+1. Descomprime la carpeta.
+2. Abre `index.html` (página de inicio con enlaces a todo) o directamente `proyecto primera materia.html` en Chrome, Edge, Firefox o Safari.
+3. Se necesita **conexión a internet** porque Bootstrap, la tipografía, las imágenes y las APIs se cargan desde la red.
 
-- **sesion20-banner.html**: Actividad 1, banner `id="banner"` que cambia a `bg-warning` con `getElementById` al actualizar la promoción.
-- **sesion20-testimonios.html**: Actividad 2, testimonios con clase `testimonio-vip` → `text-primary` (`getElementsByClassName`) y todos los párrafos → `text-danger` (`getElementsByTagName`).
-- **sesion20-contacto.html**: Actividad 3, formulario de contacto: primer campo de texto → `bg-success` (`querySelector`), todos los botones → `btn-danger` (`querySelectorAll`), campo nombre → `text-warning` (`getElementsByName`).
-- **sesiones.css**: estilos compartidos de las páginas de actividades.
+> **Nota:** `pruebas-api.html` abre el sitio dentro de un `iframe` para revisarlo. Algunos navegadores bloquean eso cuando el archivo se abre con doble clic (`file://`). Para correr las pruebas usa la versión publicada (https://entregable-programacion.vercel.app/pruebas-api.html) o un servidor local, por ejemplo con la extensión *Live Server* de VS Code o con `python3 -m http.server`.
 
-## Sesión 25 · JS en acción
+---
 
-- **sesion25-carrito.html** + **carrito.js**: Actividad 1 "Carrito de compras interactivo". Cinco cards con imagen, nombre, precio y botón Agregar; funciones `agregarProducto()` y `eliminarProducto()` que crean y quitan elementos del DOM (se elimina el último añadido); contador y total que se actualizan al instante; colores de Bootstrap que cambian según la acción (verde al agregar, rojo al eliminar, gris con el carrito vacío).
+## Estructura del proyecto
 
-## El gran reto de maquetación
+```
+Sabores de Mexico/
+├── index.html                      Página de inicio: enlaces al proyecto y a las actividades
+├── proyecto primera materia.html   PROYECTO PRINCIPAL (todas las fases)
+├── api.js                          Fase 3: integración con las APIs REST
+├── pruebas-api.html                Fase 3: 11 pruebas automáticas de las APIs y la interfaz
+├── responsivo.html                 Ejercicio de media queries (Fase 2)
+├── DOCUMENTACION.md                Documentación técnica: aspectos técnicos, APIs y bibliotecas
+├── README.md                       Este archivo
+│
+├── sesiones.css                    Estilos compartidos de las actividades de clase
+├── sesion19.html  + script.js      Sesión 19 · Manipulación del DOM
+├── sesion20-banner.html            Sesión 20 · Actividad 1 (getElementById)
+├── sesion20-testimonios.html       Sesión 20 · Actividad 2 (getElementsByClassName / TagName)
+├── sesion20-contacto.html          Sesión 20 · Actividad 3 (querySelector / All / getElementsByName)
+├── sesion25-carrito.html + carrito.js   Sesión 25 · Carrito de compras interactivo
+└── reto-layouts.html               El gran reto de maquetación · Desafío 4 (grid de Bootstrap)
+```
 
-- **reto-layouts.html**: Desafío 4, réplica de las tres opciones de layout con el grid de Bootstrap 5 (`row`, `col-12`, `col-md-4`, `col-md-8`, `col-md-3`, `col-md-9`, fila anidada). En celular las columnas se apilan y desde `md` toman la forma de la imagen.
+---
+
+## Proyecto principal: `proyecto primera materia.html`
+
+| Sección | Qué hace | Tecnologías |
+|---|---|---|
+| Encabezado y navbar | Logo, título y menú que se colapsa en celular y lleva a cada sección | Bootstrap navbar, JavaScript (scroll y cierre del menú) |
+| Nuestras instalaciones | Carrusel de fotos del restaurante | Bootstrap carousel |
+| Menú (carta) | Entradas, platos fuertes y postres; agregar platillos a "Tu selección" con total | Grid `col-12 col-md-6 col-lg-4`, JavaScript |
+| Detalle de platillo | Modal con foto, descripción y precio | Bootstrap modal |
+| Mi pedido | Panel lateral con los platillos elegidos y el total | Bootstrap offcanvas |
+| Pedidos a domicilio | Pop-up para elegir cantidades, escribir la dirección y enviar el pedido con validación | Modal, formularios, validación HTML5 + JS |
+| Recetas mexicanas | Recetas en vivo, buscador y detalle con ingredientes y video | **API REST TheMealDB** (`api.js`) |
+| Ubicación | Dirección, horario y contacto en pestañas, mapa y clima actual | Nav/tabs, iframe de Google Maps, **API REST Open-Meteo** |
+| Eventos especiales y clientes | Tarjetas de eventos y reseñas | Grid de Bootstrap |
+| Califica tu experiencia | Encuesta con estrellas que agrega la reseña a la página | Formulario, CSS, JavaScript |
+| Mi perfil | Datos del usuario que se guardan y llenan el pedido automáticamente | Modal, `localStorage` |
+
+### Fases del proyecto
+
+| Fase | Entregable | Qué se agregó |
+|---|---|---|
+| Fase 1 | Interfaz inicial | Estructura HTML, navbar, carrusel, modal, menú interactivo |
+| Fase 2 | Entregable 3 | Tabs, offcanvas, formularios, pedidos, perfil, diseño responsivo (3+ tamaños) y pruebas en dispositivos |
+| Fase 3 | Entregable 4 | Consumo de las APIs REST TheMealDB y Open-Meteo, manejo de estados, caché y pruebas automáticas |
+| Final | Entregable 5 | Integración, documentación del código e informe ejecutivo |
+
+---
+
+## APIs y bibliotecas
+
+| Recurso | Uso |
+|---|---|
+| Bootstrap 5.3.3 (CSS y JS bundle, CDN jsDelivr) | Grid, componentes y componentes interactivos |
+| Google Fonts · Roboto | Tipografía |
+| API REST TheMealDB | Recetas (`/filter.php`, `/search.php`, `/lookup.php`) |
+| API REST Open-Meteo | Clima actual en CDMX (`/v1/forecast`) |
+| Fetch API y AbortController (nativas) | Peticiones HTTP con tiempo límite |
+| Unsplash | Fotografías de platillos e instalaciones |
+
+La descripción completa de endpoints, parámetros, respuestas y manejo de errores está en [`DOCUMENTACION.md`](DOCUMENTACION.md).
+
+---
+
+## Actividades de clase incluidas
+
+- **Sesión 19 · Manipulación del DOM** (`sesion19.html`, `script.js`): cuatro desafíos con `getElementById`, `getElementsByClassName`, `querySelector` y `querySelectorAll` dentro de `DOMContentLoaded`.
+- **Sesión 20 · Selectores y colores en Bootstrap**: banner que cambia a `bg-warning`; testimonios VIP en `text-primary` y párrafos en `text-danger`; formulario con `bg-success`, `btn-danger` y `text-warning`.
+- **Sesión 25 · Carrito de compras interactivo** (`sesion25-carrito.html`, `carrito.js`): cinco productos, funciones `agregarProducto()` y `eliminarProducto()` que modifican el DOM, contador y total en tiempo real y colores por acción.
+- **El gran reto de maquetación · Desafío 4** (`reto-layouts.html`): tres layouts replicados con el grid de Bootstrap 5.
+- **Ejercicio responsivo** (`responsivo.html`): `container`, `container-fluid` y media queries que cambian el fondo según el ancho de pantalla.
