@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pruebas de la API | Sabores de México</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="sesiones.css" rel="stylesheet">
+  <style>
+    #sitio { width: 100%; height: 520px; border: 1px solid #dee2e6; border-radius: 8px; background: #fff; }
+    td code { white-space: nowrap; }
+  </style>
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="container">
+      <div class="etiqueta">Proyecto Fase 3 · Pruebas</div>
+      <h1>Pruebas de la API y de la interfaz</h1>
+      <a href="index.html" class="small">← Volver al inicio</a>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <p class="text-secondary">
+      Esta página abre el sitio en el recuadro de abajo y comprueba automáticamente que las APIs respondan
+      y que la interfaz muestre los datos correctamente. Cada prueba se ejecuta contra las APIs reales.
+    </p>
+
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+      <button class="btn btn-success" id="correr">▶ Correr pruebas</button>
+      <span class="fs-5" id="resumen"></span>
+    </div>
+
+    <div class="table-responsive mb-4">
+      <table class="table table-sm align-middle bg-white shadow-sm">
+        <thead class="table-light">
+          <tr><th>#</th><th>Prueba</th><th>Resultado</th><th>Detalle</th><th class="text-end">Tiempo</th></tr>
+        </thead>
+        <tbody id="resultados"></tbody>
+      </table>
+    </div>
+
+    <h2 class="h5 fw-bold">Sitio bajo prueba</h2>
+    <iframe id="sitio" title="Sitio bajo prueba"></iframe>
+  </main>
+
+  <script>
+    const SITIO = "proyecto%20primera%20materia.html";
+    const BASE_MEALDB = "https://www.themealdb.com/api/json/v1/1";
+    const URL_CLIMA = "https://api.open-meteo.com/v1/forecast?latitude=19.4326&longitude=-99.1332&current=temperature_2m,weather_code&timezone=America%2FMexico_City";
+
+    const esperar = (ms) => new Promise(r => setTimeout(r, ms));
+    const iframe = document.getElementById("sitio");
+    const win = () => iframe.contentWindow;
+    const doc = () => iframe.contentDocument;
+
+    // Espera hasta que se cumpla una condición (o falla al pasar el tiempo límite)
+    async function esperarA(condicion, limite = 10000) {
+      const inicio = Date.now();
+      while (Date.now() - inicio < limite) {
+        try { const v = condicion(); if (v) return v; } catch (e) {}
+        await esperar(100);
+      }
+      throw new Error("tiempo de espera agotado");
+    }
+
+    function cargarSitio() {
+      return new Promise((resolver) => {
+        iframe.onload = () => resolver();
+        iframe.src = SITIO + "?prueba=" + Date.now();
+      });
+    }
+
+    function afirmar(condicion, mensaje) { if (!condicion) throw new Error(mensaje); }
+
+    // ---------- Lista de pruebas ----------
+    const pruebas = [
+      ["API TheMealDB responde 200 con recetas mexicanas", async () => {
+        const r = await fetch(`${BASE_MEALDB}/filter.php?a=Mexican`);
+        afirmar(r.status === 200, "status " + r.status);
+        const d = await r.json();
+        afirmar(Array.isArray(d.meals) && d.meals.length > 0, "sin recetas");
+        return `${d.meals.length} recetas recibidas`;
+      }],
+      ["Cada receta trae idMeal, strMeal y strMealThumb", async () => {
+        const d = await (await fetch(`${BASE_MEALDB}/filter.php?a=Mexican`)).json();
+        const malas = d.meals.filter(m => !m.idMeal || !m.strMeal || !m.strMealThumb);
+        afirmar(malas.length === 0, `${malas.length} recetas incompletas`);
+        return "todos los campos presentes";
+      }],
+      ["La interfaz muestra una tarjeta por cada receta", async () => {
+        const d = await (await fetch(`${BASE_MEALDB}/filter.php?a=Mexican`)).json();
+        await esperarA(() => doc().getElementById("recetasConteo"));
+        const tarjetas = doc().querySelectorAll("#listaRecetas .receta").length;
+        afirmar(tarjetas === d.meals.length, `API: ${d.meals.length}, tarjetas: ${tarjetas}`);
+        return `${tarjetas} tarjetas en pantalla`;
+      }],
+      ["Buscar \"taco\" muestra solo recetas con taco", async () => {
+        doc().getElementById("buscarReceta").value = "taco";
+        doc().getElementById("formBuscarReceta").requestSubmit();
+        await esperarA(() => /taco/.test(doc().getElementById("recetasConteo")?.textContent || ""));
+        const nombres = [...doc().querySelectorAll("#listaRecetas .card-title")].map(e => e.textContent);
+        afirmar(nombres.length > 0 && nombres.every(n => /taco/i.test(n)), "resultado inesperado: " + nombres.join(", "));
+        return nombres.join(", ");
+      }],
+      ["Una búsqueda sin resultados muestra un aviso", async () => {
+        doc().getElementById("buscarReceta").value = "zzzxyz";
+        doc().getElementById("formBuscarReceta").requestSubmit();
+        await esperarA(() => doc().getElementById("recetasVacio"));
+        afirmar(doc().querySelectorAll("#listaRecetas .receta").length === 0, "quedaron tarjetas");
+        return "aviso \"No encontramos recetas\" visible";
+      }],
+      ["\"Ver receta\" abre el detalle con ingredientes", async () => {
+        doc().getElementById("verMexicanas").click();
+        await esperarA(() => doc().querySelector("#listaRecetas .receta button"));
+        const nombre = doc().querySelector("#listaRecetas .card-title").textContent;
+        doc().querySelector("#listaRecetas .receta button").click();
+        await esperarA(() => doc().getElementById("recetaIngredientes")?.children.length > 0);
+        const titulo = doc().getElementById("recetaTitulo").textContent;
+        const n = doc().getElementById("recetaIngredientes").children.length;
+        afirmar(titulo === nombre, `título "${titulo}" ≠ "${nombre}"`);
+        win().bootstrap.Modal.getInstance(doc().getElementById("modalReceta")).hide();
+        await esperar(500);
+        return `${titulo}: ${n} ingredientes`;
+      }],
+      ["El detalle se guarda en caché (2.ª vez sin pedir a la API)", async () => {
+        const antes = win().RecetasAPI.cache.size;
+        afirmar(antes > 0, "la caché está vacía");
+        const id = [...win().RecetasAPI.cache.keys()][0];
+        const inicio = performance.now();
+        await win().verReceta(id);
+        const ms = Math.round(performance.now() - inicio);
+        afirmar(win().RecetasAPI.cache.size === antes, "se volvió a guardar");
+        win().bootstrap.Modal.getInstance(doc().getElementById("modalReceta")).hide();
+        await esperar(500);
+        return `abrió en ${ms} ms desde caché`;
+      }],
+      ["Si la API falla se muestra un error con \"Reintentar\"", async () => {
+        const original = win().RecetasAPI.BASE;
+        win().RecetasAPI.BASE = "https://www.themealdb.com/api/json/v1/no-existe";
+        await win().cargarMexicanas();
+        const error = doc().getElementById("recetasError");
+        afirmar(error && doc().getElementById("reintentarRecetas"), "no apareció el error");
+        win().RecetasAPI.BASE = original;
+        return error.querySelector("span").textContent.trim();
+      }],
+      ["\"Reintentar\" vuelve a cargar las recetas", async () => {
+        doc().getElementById("reintentarRecetas").click();
+        await esperarA(() => doc().querySelectorAll("#listaRecetas .receta").length > 0);
+        return `${doc().querySelectorAll("#listaRecetas .receta").length} recetas de nuevo`;
+      }],
+      ["API Open-Meteo responde con la temperatura", async () => {
+        const r = await fetch(URL_CLIMA);
+        afirmar(r.status === 200, "status " + r.status);
+        const d = await r.json();
+        afirmar(typeof d.current.temperature_2m === "number", "sin temperatura");
+        return `${d.current.temperature_2m} °C en CDMX`;
+      }],
+      ["La sección Ubicación muestra el clima", async () => {
+        const temp = await esperarA(() => doc().getElementById("climaTemp"));
+        return temp.textContent.trim();
+      }],
+    ];
+
+    async function correr() {
+      const boton = document.getElementById("correr");
+      const tabla = document.getElementById("resultados");
+      boton.disabled = true;
+      tabla.innerHTML = "";
+      document.getElementById("resumen").textContent = "Abriendo el sitio…";
+      await cargarSitio();
+
+      let aprobadas = 0;
+      for (let i = 0; i < pruebas.length; i++) {
+        const [nombre, prueba] = pruebas[i];
+        const fila = tabla.insertRow();
+        fila.innerHTML = `<td>${i + 1}</td><td></td><td><span class="badge text-bg-secondary">corriendo…</span></td><td class="small"></td><td class="text-end small"></td>`;
+        fila.cells[1].textContent = nombre;
+        const inicio = performance.now();
+        try {
+          const detalle = await prueba();
+          fila.cells[2].innerHTML = `<span class="badge text-bg-success">✓ Pasó</span>`;
+          fila.cells[3].textContent = detalle || "";
+          aprobadas++;
+        } catch (error) {
+          fila.cells[2].innerHTML = `<span class="badge text-bg-danger">✕ Falló</span>`;
+          fila.cells[3].textContent = error.message;
+        }
+        fila.cells[4].textContent = Math.round(performance.now() - inicio) + " ms";
+        document.getElementById("resumen").textContent = `${aprobadas} de ${i + 1} pruebas aprobadas`;
+      }
+      document.getElementById("resumen").innerHTML =
+        `<span class="badge ${aprobadas === pruebas.length ? "text-bg-success" : "text-bg-danger"} fs-6">${aprobadas} de ${pruebas.length} pruebas aprobadas</span>`;
+      boton.disabled = false;
+    }
+
+    document.getElementById("correr").addEventListener("click", correr);
+    correr();
+  </script>
+</body>
+</html>

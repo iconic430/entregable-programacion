@@ -4,6 +4,12 @@
 - **responsivo.html**: ejercicio de `container` / `container-fluid` y media queries que cambian el color de fondo según el tamaño de la pantalla.
 - **index.html**: página de inicio con enlaces a los dos archivos.
 
+## Proyecto Fase 3 · Integración de APIs REST
+
+- **api.js**: consume la API REST de TheMealDB (recetas mexicanas, búsqueda y detalle con caché) y la de Open-Meteo (clima actual en CDMX). Maneja estados de carga, error con "Reintentar" y sin resultados.
+- **pruebas-api.html**: 11 pruebas automáticas de las APIs y de la interfaz.
+- **DOCUMENTACION.md**: aspectos técnicos, documentación de las APIs y bibliotecas usadas.
+
 ## Sesión 19 · JavaScript: selectores y DOM
 
 - **sesion19.html** + **script.js**: Actividad 1 "Manipulación del DOM". Cuatro desafíos con `getElementById`, `getElementsByClassName`, `querySelector` y `querySelectorAll`, todo dentro de `DOMContentLoaded`.
