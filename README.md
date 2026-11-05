@@ -36,6 +36,11 @@ Sabores de Mexico/
 ├── sesion20-banner.html            Sesión 20 · Actividad 1 (getElementById)
 ├── sesion20-testimonios.html       Sesión 20 · Actividad 2 (getElementsByClassName / TagName)
 ├── sesion20-contacto.html          Sesión 20 · Actividad 3 (querySelector / All / getElementsByName)
+├── sesion21-card.html              Sesión 21 · Dé un clic a una acción (textos y src de una card)
+├── sesion22-producto.html          Sesión 22 · Selección de producto (card + 2 botones con click)
+├── sesion23-galeria.html           Sesión 23 · Aplicaciones dinámicas (URL de imagen → galería)
+├── sesion24-tareas.html            Sesión 24 · Lista de tareas (ids, addEventListener, remove())
+├── portafolio.html                 Portafolio de evidencias de las sesiones 19 a 25
 ├── sesion25-carrito.html + carrito.js   Sesión 25 · Carrito de compras interactivo
 └── reto-layouts.html               El gran reto de maquetación · Desafío 4 (grid de Bootstrap)
 ```
@@ -88,6 +93,11 @@ La descripción completa de endpoints, parámetros, respuestas y manejo de error
 
 - **Sesión 19 · Manipulación del DOM** (`sesion19.html`, `script.js`): cuatro desafíos con `getElementById`, `getElementsByClassName`, `querySelector` y `querySelectorAll` dentro de `DOMContentLoaded`.
 - **Sesión 20 · Selectores y colores en Bootstrap**: banner que cambia a `bg-warning`; testimonios VIP en `text-primary` y párrafos en `text-danger`; formulario con `bg-success`, `btn-danger` y `text-warning`.
+- **Sesión 21 · Dé un clic a una acción** (`sesion21-card.html`): cada clic cambia el título, texto, precio y etiqueta de una card y actualiza el atributo `src` de su imagen con `setAttribute`.
+- **Sesión 22 · Selección de producto** (`sesion22-producto.html`): card de Bootstrap con título, texto e imagen y dos botones (Seleccionar y Quitar) que capturan el evento `click`.
+- **Sesión 23 · Desarrollando aplicaciones dinámicas** (`sesion23-galeria.html`): campo de entrada con clases de Bootstrap para escribir la URL de una imagen; la imagen se crea en una galería con `createElement`, se valida la URL y se puede quitar.
+- **Sesión 24 · Manejando tu lista de tareas** (`sesion24-tareas.html`): `<ul>` con cuatro tareas con `id`, botón con `id` que con `addEventListener` y `remove()` elimina la primera, y campo de texto con botón para agregar tareas.
+- **Portafolio de evidencias** (`portafolio.html`): reúne las actividades de las sesiones 19 a 25 con lo que cumple cada una.
 - **Sesión 25 · Carrito de compras interactivo** (`sesion25-carrito.html`, `carrito.js`): cinco productos, funciones `agregarProducto()` y `eliminarProducto()` que modifican el DOM, contador y total en tiempo real y colores por acción.
 - **El gran reto de maquetación · Desafío 4** (`reto-layouts.html`): tres layouts replicados con el grid de Bootstrap 5.
 - **Ejercicio responsivo** (`responsivo.html`): `container`, `container-fluid` y media queries que cambian el fondo según el ancho de pantalla.

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio de evidencias | Programación y diseño de aplicaciones</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="sesiones.css" rel="stylesheet">
+  <style>
+    .evidencia .numero {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: #6fae4a;
+      color: #fff;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .evidencia ul { padding-left: 1.1rem; }
+    .evidencia li::marker { content: "✓  "; color: #198754; }
+  </style>
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="container">
+      <div class="etiqueta">Programación y diseño de aplicaciones</div>
+      <h1>Portafolio de evidencias</h1>
+      <a href="index.html" class="small">← Volver al inicio</a>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <p class="text-secondary mb-4">Actividades de las sesiones 19 a 25 sobre manipulación del DOM, eventos y aplicaciones dinámicas con JavaScript y Bootstrap. Cada tarjeta indica lo que cumple la actividad y abre la evidencia.</p>
+
+    <div class="row g-4">
+
+      <div class="col-lg-6">
+        <article class="card evidencia actividad shadow-sm h-100">
+          <div class="card-body d-flex gap-3">
+            <div class="numero">19</div>
+            <div>
+              <h2 class="h5 fw-bold">Manipulación del DOM</h2>
+              <ul class="small mb-3">
+                <li><code>getElementById</code> cambia el texto del título.</li>
+                <li><code>getElementsByClassName</code> cambia el color de las cajas.</li>
+                <li><code>querySelector</code> cambia el fondo de la primera caja a <code>lightgreen</code>.</li>
+              </ul>
+              <a href="sesion19.html" class="btn btn-sm btn-success">Abrir actividad</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-6">
+        <article class="card evidencia actividad shadow-sm h-100">
+          <div class="card-body d-flex gap-3">
+            <div class="numero">20</div>
+            <div>
+              <h2 class="h5 fw-bold">Selectores y colores en Bootstrap</h2>
+              <ul class="small mb-3">
+                <li>Fondo del banner promocional.</li>
+                <li>Sección de testimonios.</li>
+                <li>Formulario de contacto personalizado.</li>
+              </ul>
+              <a href="sesion20-banner.html" class="btn btn-sm btn-success">Banner</a>
+              <a href="sesion20-testimonios.html" class="btn btn-sm btn-success">Testimonios</a>
+              <a href="sesion20-contacto.html" class="btn btn-sm btn-success">Contacto</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-6">
+        <article class="card evidencia actividad shadow-sm h-100">
+          <div class="card-body d-flex gap-3">
+            <div class="numero">21</div>
+            <div>
+              <h2 class="h5 fw-bold">Dé un clic a una acción</h2>
+              <ul class="small mb-3">
+                <li>Modifica los elementos y textos de una card (título, texto, precio, etiqueta).</li>
+                <li>Actualiza el atributo <code>src</code> de la imagen dentro de la card.</li>
+              </ul>
+              <a href="sesion21-card.html" class="btn btn-sm btn-success">Abrir actividad</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-6">
+        <article class="card evidencia actividad shadow-sm h-100">
+          <div class="card-body d-flex gap-3">
+            <div class="numero">22</div>
+            <div>
+              <h2 class="h5 fw-bold">Selección de producto</h2>
+              <ul class="small mb-3">
+                <li>Card de Bootstrap con título, texto e imagen.</li>
+                <li>Dos botones que capturan el evento <code>click</code> (Seleccionar y Quitar).</li>
+              </ul>
+              <a href="sesion22-producto.html" class="btn btn-sm btn-success">Abrir actividad</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-6">
+        <article class="card evidencia actividad shadow-sm h-100">
+          <div class="card-body d-flex gap-3">
+            <div class="numero">23</div>
+            <div>
+              <h2 class="h5 fw-bold">Desarrollando aplicaciones dinámicas</h2>
+              <ul class="small mb-3">
+                <li>Campo de entrada para la URL de la imagen que se agrega a la galería.</li>
+                <li>Estilizado con clases de Bootstrap (<code>input-group</code>, <code>form-control</code>, <code>btn</code>, <code>card</code>).</li>
+              </ul>
+              <a href="sesion23-galeria.html" class="btn btn-sm btn-success">Abrir actividad</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-6">
+        <article class="card evidencia actividad shadow-sm h-100">
+          <div class="card-body d-flex gap-3">
+            <div class="numero">24</div>
+            <div>
+              <h2 class="h5 fw-bold">Manejando tu lista de tareas</h2>
+              <ul class="small mb-3">
+                <li>Lista <code>&lt;ul&gt;</code> con cuatro elementos.</li>
+                <li><code>id</code> en el botón y en cada elemento de la lista.</li>
+                <li><code>addEventListener</code> detecta el clic en el botón.</li>
+                <li><code>remove()</code> elimina el primer elemento.</li>
+                <li>Campo de texto y botón para agregar una tarea nueva.</li>
+              </ul>
+              <a href="sesion24-tareas.html" class="btn btn-sm btn-success">Abrir actividad</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-lg-6">
+        <article class="card evidencia actividad shadow-sm h-100">
+          <div class="card-body d-flex gap-3">
+            <div class="numero">25</div>
+            <div>
+              <h2 class="h5 fw-bold">Carrito de compras interactivo</h2>
+              <ul class="small mb-3">
+                <li>JavaScript agrega y elimina elementos en el DOM (<code>agregarProducto()</code> y <code>eliminarProducto()</code>).</li>
+                <li>Contador, total y colores de Bootstrap que cambian con cada acción.</li>
+              </ul>
+              <a href="sesion25-carrito.html" class="btn btn-sm btn-success">Abrir actividad</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
