@@ -40,6 +40,7 @@ Sabores de Mexico/
 ├── sesion22-producto.html          Sesión 22 · Selección de producto (card + 2 botones con click)
 ├── sesion23-galeria.html           Sesión 23 · Aplicaciones dinámicas (URL de imagen → galería)
 ├── sesion24-tareas.html            Sesión 24 · Lista de tareas (ids, addEventListener, remove())
+├── sesion29-pokemon.html + pokemon.js   Sesión 29 · Pokémon con map y filter (PokéAPI)
 ├── portafolio.html                 Portafolio de evidencias de las sesiones 19 a 25
 ├── sesion25-carrito.html + carrito.js   Sesión 25 · Carrito de compras interactivo
 └── reto-layouts.html               El gran reto de maquetación · Desafío 4 (grid de Bootstrap)
@@ -99,5 +100,6 @@ La descripción completa de endpoints, parámetros, respuestas y manejo de error
 - **Sesión 24 · Manejando tu lista de tareas** (`sesion24-tareas.html`): `<ul>` con cuatro tareas con `id`, botón con `id` que con `addEventListener` y `remove()` elimina la primera, y campo de texto con botón para agregar tareas.
 - **Portafolio de evidencias** (`portafolio.html`): reúne las actividades de las sesiones 19 a 25 con lo que cumple cada una.
 - **Sesión 25 · Carrito de compras interactivo** (`sesion25-carrito.html`, `carrito.js`): cinco productos, funciones `agregarProducto()` y `eliminarProducto()` que modifican el DOM, contador y total en tiempo real y colores por acción.
+- **Sesión 29 · Pokémon con map y filter** (`sesion29-pokemon.html`, `pokemon.js`): obtiene los 151 primeros Pokémon de la PokéAPI (nombre, imagen y peso). Al hacer clic en `#search-button` se captura el texto de `#search-input`, `filter` selecciona los que coinciden, la lista `#pokemon-list` se limpia y `map` crea el nuevo array de `<li>` que se inserta en ella.
 - **El gran reto de maquetación · Desafío 4** (`reto-layouts.html`): tres layouts replicados con el grid de Bootstrap 5.
 - **Ejercicio responsivo** (`responsivo.html`): `container`, `container-fluid` y media queries que cambian el fondo según el ancho de pantalla.
